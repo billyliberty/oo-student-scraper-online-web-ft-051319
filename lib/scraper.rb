@@ -5,11 +5,11 @@ class Scraper
 
   def self.scrape_index_page(index_url)
     student_array = []
-    html = Nokogiri::HTML(open(index_url))
-    html.css(".student.card").map do |student|
+    index_page = Nokogiri::HTML(open(index_url))
+    index_page.css(".student.card").map do |student|
       hash = {
-        name: student.css("h4.student-name").text,
-        location: student.css("p.student-location").text,
+        name: student.css(".student-name").text,
+        location: student.css(".student-location").text,
         profile_url: "http://students.learn.co/" + student.css("a").attribute("href")
       }
       student_array << hash
