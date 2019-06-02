@@ -10,9 +10,7 @@ class Scraper
       name = student.css(".student-name").text
       location = student.css(".student-location").text
       profile_url = student.css("a").attribute("href").value
-      student_profile = {:name => name,
-                :location => location,
-                :profile_url => profile_url}
+      student_profile = {:name => name, :location => location, :profile_url => profile_url}
       student_array << student_profile
       end
     student_array
@@ -22,7 +20,6 @@ class Scraper
   def self.scrape_profile_page(profile_url)
       page = Nokogiri::HTML(open(profile_url))
       student_hash = {}
-
       container = page.css(".social-icon-container a").collect{|icon| icon.attribute("href").value}
       container.each do |link|
         if link.include?("twitter")
